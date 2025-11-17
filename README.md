@@ -141,6 +141,24 @@ The application automatically initializes with sample restaurant data including:
 
 Each restaurant comes with a menu of 4 items with images and descriptions.
 
+## Security Considerations
+
+This application includes the following security features:
+
+- Input validation for order placement
+- CORS protection
+- Body parsing limits
+- Environment variable support for sensitive configuration
+
+**Production Recommendations:**
+- Add rate limiting to prevent abuse (currently flagged by CodeQL)
+- Implement user authentication and authorization
+- Add input sanitization and validation
+- Use HTTPS for all communications
+- Store sensitive data securely
+- Add CSRF protection
+- Implement proper session management
+
 ## Development
 
 To run in development mode with auto-reload:
