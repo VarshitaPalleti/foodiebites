@@ -1,4 +1,4 @@
-# Foodiego - Food Delivery Application
+# Foodie Bites - Food Delivery Application
 
 A modern, clean, and appealing food delivery web application built with HTML, JavaScript, Tailwind CSS, and MongoDB.
 
@@ -26,24 +26,28 @@ A modern, clean, and appealing food delivery web application built with HTML, Ja
 ## Installation
 
 1. Clone the repository:
+
 ```bash
-git clone https://github.com/VarshitaPalleti/foodiego.git
-cd foodiego
+git clone https://github.com/VarshitaPalleti/Foodie Bites.git
+cd Foodie Bites
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
 
 3. Create a `.env` file in the root directory (optional):
+
 ```
 PORT=3000
 MONGODB_URI=mongodb://localhost:27017
-DB_NAME=foodiego
+DB_NAME=Foodie Bites
 ```
 
 4. Make sure MongoDB is running on your system:
+
 ```bash
 # For macOS/Linux
 mongod
@@ -55,11 +59,13 @@ net start MongoDB
 ## Running the Application
 
 1. Start the server:
+
 ```bash
 npm start
 ```
 
 2. Open your browser and navigate to:
+
 ```
 http://localhost:3000
 ```
@@ -67,7 +73,7 @@ http://localhost:3000
 ## Project Structure
 
 ```
-foodiego/
+Foodie Bites/
 ├── config/
 │   └── database.js          # MongoDB connection configuration
 ├── models/
@@ -94,17 +100,20 @@ foodiego/
 ## Features Breakdown
 
 ### Home Page
+
 - View all available restaurants
 - Filter restaurants by cuisine type
 - Search for specific restaurants or cuisines
 - See restaurant ratings and delivery times
 
 ### Restaurant Page
+
 - View restaurant details
 - Browse menu items with images and descriptions
 - Add items to cart with quantity selection
 
 ### Cart Page
+
 - View all cart items
 - Update quantities or remove items
 - Enter delivery details
@@ -112,6 +121,7 @@ foodiego/
 - Place order
 
 ### Orders Page
+
 - View all placed orders
 - Track order status
 - Cancel pending orders
@@ -120,10 +130,12 @@ foodiego/
 ## API Endpoints
 
 ### Restaurants
+
 - `GET /api/restaurants` - Get all restaurants
 - `GET /api/restaurants/:id` - Get restaurant by ID
 
 ### Orders
+
 - `POST /api/orders` - Create a new order
 - `GET /api/orders` - Get all orders
 - `GET /api/orders/:id` - Get order by ID
@@ -132,6 +144,7 @@ foodiego/
 ## Sample Data
 
 The application automatically initializes with sample restaurant data including:
+
 - Pizza Paradise (Italian)
 - Burger House (American)
 - Sushi Master (Japanese)
@@ -151,6 +164,7 @@ This application includes the following security features:
 - Environment variable support for sensitive configuration
 
 **Production Recommendations:**
+
 - Add rate limiting to prevent abuse (currently flagged by CodeQL)
 - Implement user authentication and authorization
 - Add input sanitization and validation
@@ -162,6 +176,7 @@ This application includes the following security features:
 ## Development
 
 To run in development mode with auto-reload:
+
 ```bash
 npm run dev
 ```
@@ -180,4 +195,4 @@ This project is licensed under the ISC License.
 
 ## Support
 
-For support, email support@foodiego.com or create an issue in the repository.
+For support, email support@Foodie Bites.com or create an issue in the repository.
