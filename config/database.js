@@ -2,7 +2,7 @@ const { MongoClient } = require("mongodb");
 
 // MongoDB connection URI (can be overridden with environment variable)
 const uri = process.env.MONGODB_URI || "mongodb://localhost:27017";
-const dbName = process.env.DB_NAME || "Foodie Bites";
+const dbName = process.env.DB_NAME || "foodiebites";
 
 let client;
 let db;

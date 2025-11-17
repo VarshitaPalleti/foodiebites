@@ -1,83 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Orders - Foodie Bites</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body class="bg-gray-50">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body class="bg-gray-50">
     <!-- Header -->
     <header class="bg-white shadow-sm sticky top-0 z-50">
-        <nav class="container mx-auto px-4 py-4">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-2">
-                    <i class="fas fa-utensils text-orange-500 text-2xl"></i>
-                    <a href="/">
-                        <h1 class="text-2xl font-bold text-gray-800">Foodie Bites</h1>
-                    </a>
-                </div>
-                <div class="flex items-center space-x-6">
-                    <a href="/orders" class="text-gray-700 hover:text-orange-500 transition">Orders</a>
-                    <a href="/cart" class="relative text-gray-700 hover:text-orange-500 transition">
-                        <i class="fas fa-shopping-cart text-xl"></i>
-                        <span id="cart-count" class="absolute -top-2 -right-2 bg-orange-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
-                    </a>
-                </div>
-            </div>
-        </nav>
+      <nav class="container mx-auto px-4 py-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-2">
+            <i class="fas fa-utensils text-orange-500 text-2xl"></i>
+            <a href="/">
+              <h1 class="text-2xl font-bold text-gray-800">Foodie Bites</h1>
+            </a>
+          </div>
+          <div class="flex items-center space-x-6">
+            <a
+              href="/orders"
+              class="text-gray-700 hover:text-orange-500 transition"
+              >Orders</a
+            >
+            <a
+              href="/cart"
+              class="relative text-gray-700 hover:text-orange-500 transition"
+            >
+              <i class="fas fa-shopping-cart text-xl"></i>
+              <span
+                id="cart-count"
+                class="absolute -top-2 -right-2 bg-orange-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center"
+                >0</span
+              >
+            </a>
+          </div>
+        </div>
+      </nav>
     </header>
 
     <div class="container mx-auto px-4 py-8">
-        <h2 class="text-3xl font-bold text-gray-800 mb-8">My Orders</h2>
+      <h2 class="text-3xl font-bold text-gray-800 mb-8">My Orders</h2>
 
-        <div id="orders-container" class="space-y-4">
-            <!-- Orders will be inserted here -->
-        </div>
+      <div id="orders-container" class="space-y-4">
+        <!-- Orders will be inserted here -->
+      </div>
 
-        <div id="loading" class="text-center py-12">
-            <i class="fas fa-spinner fa-spin text-4xl text-orange-500"></i>
-            <p class="mt-4 text-gray-600">Loading orders...</p>
-        </div>
+      <div id="loading" class="text-center py-12">
+        <i class="fas fa-spinner fa-spin text-4xl text-orange-500"></i>
+        <p class="mt-4 text-gray-600">Loading orders...</p>
+      </div>
 
-        <div id="no-orders" class="bg-white rounded-lg shadow-md p-8 text-center hidden">
-            <i class="fas fa-receipt text-6xl text-gray-300 mb-4"></i>
-            <p class="text-xl text-gray-600 mb-4">No orders yet</p>
-            <a href="/" class="inline-block bg-orange-500 text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition">
-                Start Ordering
-            </a>
-        </div>
+      <div
+        id="no-orders"
+        class="bg-white rounded-lg shadow-md p-8 text-center hidden"
+      >
+        <i class="fas fa-receipt text-6xl text-gray-300 mb-4"></i>
+        <p class="text-xl text-gray-600 mb-4">No orders yet</p>
+        <a
+          href="/"
+          class="inline-block bg-orange-500 text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition"
+        >
+          Start Ordering
+        </a>
+      </div>
     </div>
 
     <!-- Footer -->
     <footer class="bg-gray-800 text-white mt-16">
-        <div class="container mx-auto px-4 py-8">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div>
-                    <h4 class="text-xl font-bold mb-4">Foodie Bites</h4>
-                    <p class="text-gray-400">Your favorite food, delivered fast</p>
-                </div>
-                <div>
-                    <h4 class="text-xl font-bold mb-4">Quick Links</h4>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="/" class="hover:text-white transition">Home</a></li>
-                        <li><a href="/orders" class="hover:text-white transition">My Orders</a></li>
-                        <li><a href="/cart" class="hover:text-white transition">Cart</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-xl font-bold mb-4">Contact</h4>
-                    <p class="text-gray-400">support@Foodie Bites.com</p>
-                    <p class="text-gray-400">+1 (555) 123-4567</p>
-                </div>
-            </div>
-            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
-                <p>&copy; 2024 Foodie Bites. All rights reserved.</p>
-            </div>
+      <div class="container mx-auto px-4 py-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div>
+            <h4 class="text-xl font-bold mb-4">Foodie Bites</h4>
+            <p class="text-gray-400">Your favorite food, delivered fast</p>
+          </div>
+          <div>
+            <h4 class="text-xl font-bold mb-4">Quick Links</h4>
+            <ul class="space-y-2 text-gray-400">
+              <li><a href="/" class="hover:text-white transition">Home</a></li>
+              <li>
+                <a href="/orders" class="hover:text-white transition"
+                  >My Orders</a
+                >
+              </li>
+              <li>
+                <a href="/cart" class="hover:text-white transition">Cart</a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-xl font-bold mb-4">Contact</h4>
+            <p class="text-gray-400">varshitapalleti@gmail.com</p>
+          </div>
         </div>
+        <div
+          class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400"
+        >
+          <p>&copy; 2025 Foodie Bites. All rights reserved.</p>
+        </div>
+      </div>
     </footer>
 
     <script src="/js/orders.js"></script>
-</body>
+  </body>
 </html>

@@ -28,8 +28,8 @@ A modern, clean, and appealing food delivery web application built with HTML, Ja
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/VarshitaPalleti/Foodie Bites.git
-cd Foodie Bites
+git clone https://github.com/VarshitaPalleti/foodiebites.git
+cd foodiebites
 ```
 
 2. Install dependencies:
@@ -43,7 +43,7 @@ npm install
 ```
 PORT=3000
 MONGODB_URI=mongodb://localhost:27017
-DB_NAME=Foodie Bites
+DB_NAME=foodiebites
 ```
 
 4. Make sure MongoDB is running on your system:
@@ -73,7 +73,7 @@ http://localhost:3000
 ## Project Structure
 
 ```
-Foodie Bites/
+foodiebites/
 ├── config/
 │   └── database.js          # MongoDB connection configuration
 ├── models/
@@ -189,10 +189,3 @@ npm run dev
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## License
-
-This project is licensed under the ISC License.
-
-## Support
-
-For support, email support@Foodie Bites.com or create an issue in the repository.
