@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant - Foodiego</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-utensils text-orange-500 text-2xl"></i>
+                    <h1 class="text-2xl font-bold text-gray-800">Foodiego</h1>
+                </div>
+                <div class="flex items-center space-x-6">
+                    <a href="/" class="text-gray-700 hover:text-orange-500 transition">Home</a>
+                    <a href="/orders" class="text-gray-700 hover:text-orange-500 transition">Orders</a>
+                    <a href="/cart" class="relative text-gray-700 hover:text-orange-500 transition">
+                        <i class="fas fa-shopping-cart text-xl"></i>
+                        <span id="cart-count" class="absolute -top-2 -right-2 bg-orange-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Back Button -->
+    <div class="container mx-auto px-4 py-4">
+        <a href="/" class="inline-flex items-center text-gray-600 hover:text-orange-500 transition">
+            <i class="fas fa-arrow-left mr-2"></i>
+            Back to Restaurants
+        </a>
+    </div>
+
+    <!-- Restaurant Header -->
+    <section id="restaurant-header" class="container mx-auto px-4 py-8">
+        <!-- Loading -->
+        <div id="loading" class="text-center py-12">
+            <i class="fas fa-spinner fa-spin text-4xl text-orange-500"></i>
+            <p class="mt-4 text-gray-600">Loading restaurant...</p>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu-section" class="container mx-auto px-4 py-8 hidden">
+        <h3 class="text-3xl font-bold text-gray-800 mb-6">Menu</h3>
+        <div id="menu-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Menu items will be inserted here -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white mt-16">
+        <div class="container mx-auto px-4 py-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h4 class="text-xl font-bold mb-4">Foodiego</h4>
+                    <p class="text-gray-400">Your favorite food, delivered fast</p>
+                </div>
+                <div>
+                    <h4 class="text-xl font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="/" class="hover:text-white transition">Home</a></li>
+                        <li><a href="/orders" class="hover:text-white transition">My Orders</a></li>
+                        <li><a href="/cart" class="hover:text-white transition">Cart</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-xl font-bold mb-4">Contact</h4>
+                    <p class="text-gray-400">support@foodiego.com</p>
+                    <p class="text-gray-400">+1 (555) 123-4567</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 Foodiego. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/restaurant.js"></script>
+</body>
+</html>

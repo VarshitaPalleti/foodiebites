@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart - Foodiego</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-utensils text-orange-500 text-2xl"></i>
+                    <h1 class="text-2xl font-bold text-gray-800">Foodiego</h1>
+                </div>
+                <div class="flex items-center space-x-6">
+                    <a href="/" class="text-gray-700 hover:text-orange-500 transition">Home</a>
+                    <a href="/orders" class="text-gray-700 hover:text-orange-500 transition">Orders</a>
+                    <a href="/cart" class="relative text-gray-700 hover:text-orange-500 transition">
+                        <i class="fas fa-shopping-cart text-xl"></i>
+                        <span id="cart-count" class="absolute -top-2 -right-2 bg-orange-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container mx-auto px-4 py-8">
+        <h2 class="text-3xl font-bold text-gray-800 mb-8">Shopping Cart</h2>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Cart Items -->
+            <div class="lg:col-span-2">
+                <div id="cart-items" class="space-y-4">
+                    <!-- Cart items will be inserted here -->
+                </div>
+                <div id="empty-cart" class="bg-white rounded-lg shadow-md p-8 text-center hidden">
+                    <i class="fas fa-shopping-cart text-6xl text-gray-300 mb-4"></i>
+                    <p class="text-xl text-gray-600 mb-4">Your cart is empty</p>
+                    <a href="/" class="inline-block bg-orange-500 text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition">
+                        Browse Restaurants
+                    </a>
+                </div>
+            </div>
+
+            <!-- Order Summary -->
+            <div class="lg:col-span-1">
+                <div id="order-summary" class="bg-white rounded-lg shadow-md p-6 sticky top-24">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Order Summary</h3>
+                    <div class="space-y-3 mb-4">
+                        <div class="flex justify-between text-gray-600">
+                            <span>Subtotal</span>
+                            <span id="subtotal">$0.00</span>
+                        </div>
+                        <div class="flex justify-between text-gray-600">
+                            <span>Delivery Fee</span>
+                            <span id="delivery-fee">$2.99</span>
+                        </div>
+                        <div class="flex justify-between text-gray-600">
+                            <span>Tax</span>
+                            <span id="tax">$0.00</span>
+                        </div>
+                        <div class="border-t pt-3 flex justify-between text-lg font-bold text-gray-800">
+                            <span>Total</span>
+                            <span id="total">$0.00</span>
+                        </div>
+                    </div>
+
+                    <!-- Delivery Details Form -->
+                    <div class="border-t pt-4 mb-4">
+                        <h4 class="font-semibold text-gray-800 mb-3">Delivery Details</h4>
+                        <form id="delivery-form" class="space-y-3">
+                            <input type="text" id="customer-name" placeholder="Your Name" required
+                                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-orange-500">
+                            <input type="tel" id="customer-phone" placeholder="Phone Number" required
+                                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-orange-500">
+                            <textarea id="customer-address" placeholder="Delivery Address" rows="3" required
+                                      class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-orange-500"></textarea>
+                        </form>
+                    </div>
+
+                    <button onclick="placeOrder()" id="checkout-btn" 
+                            class="w-full bg-orange-500 text-white py-3 rounded-lg hover:bg-orange-600 transition font-semibold">
+                        Place Order
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white mt-16">
+        <div class="container mx-auto px-4 py-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h4 class="text-xl font-bold mb-4">Foodiego</h4>
+                    <p class="text-gray-400">Your favorite food, delivered fast</p>
+                </div>
+                <div>
+                    <h4 class="text-xl font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="/" class="hover:text-white transition">Home</a></li>
+                        <li><a href="/orders" class="hover:text-white transition">My Orders</a></li>
+                        <li><a href="/cart" class="hover:text-white transition">Cart</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-xl font-bold mb-4">Contact</h4>
+                    <p class="text-gray-400">support@foodiego.com</p>
+                    <p class="text-gray-400">+1 (555) 123-4567</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 Foodiego. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/cart.js"></script>
+</body>
+</html>
