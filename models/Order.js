@@ -20,15 +20,26 @@ class Order {
 
     static async getById(id) {
         const db = getDB();
-        return await db.collection('orders').findOne({ _id: new ObjectId(id) });
+        try {
+            return await db.collection('orders').findOne({ _id: new ObjectId(id) });
+        } catch (error) {
+            return await db.collection('orders').findOne({ _id: id });
+        }
     }
 
     static async updateStatus(id, status) {
         const db = getDB();
-        return await db.collection('orders').updateOne(
-            { _id: new ObjectId(id) },
-            { $set: { status: status, updatedAt: new Date() } }
-        );
+        try {
+            return await db.collection('orders').updateOne(
+                { _id: new ObjectId(id) },
+                { $set: { status: status, updatedAt: new Date() } }
+            );
+        } catch (error) {
+            return await db.collection('orders').updateOne(
+                { _id: id },
+                { $set: { status: status, updatedAt: new Date() } }
+            );
+        }
     }
 }
 

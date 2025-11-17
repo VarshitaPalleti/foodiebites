@@ -6,7 +6,12 @@ const Restaurant = require('../models/Restaurant');
 router.get('/', async (req, res) => {
     try {
         const restaurants = await Restaurant.getAll();
-        res.json(restaurants);
+        // Ensure _id is converted to string for JSON response
+        const formattedRestaurants = restaurants.map(r => ({
+            ...r,
+            _id: r._id && r._id.toString ? r._id.toString() : r._id
+        }));
+        res.json(formattedRestaurants);
     } catch (error) {
         res.status(500).json({ error: 'Failed to fetch restaurants' });
     }
@@ -19,7 +24,12 @@ router.get('/:id', async (req, res) => {
         if (!restaurant) {
             return res.status(404).json({ error: 'Restaurant not found' });
         }
-        res.json(restaurant);
+        // Ensure _id is converted to string for JSON response
+        const formattedRestaurant = {
+            ...restaurant,
+            _id: restaurant._id && restaurant._id.toString ? restaurant._id.toString() : restaurant._id
+        };
+        res.json(formattedRestaurant);
     } catch (error) {
         res.status(500).json({ error: 'Failed to fetch restaurant' });
     }

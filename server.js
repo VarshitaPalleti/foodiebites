@@ -48,10 +48,15 @@ async function startServer() {
         
         app.listen(PORT, () => {
             console.log(`Server is running on http://localhost:${PORT}`);
+            console.log('Visit http://localhost:${PORT} to view the application');
         });
     } catch (error) {
-        console.error('Failed to start server:', error);
-        process.exit(1);
+        console.error('Server startup error:', error);
+        // Continue running even if DB connection fails - using in-memory storage
+        await Restaurant.initializeSampleData();
+        app.listen(PORT, () => {
+            console.log(`Server is running on http://localhost:${PORT} (using in-memory storage)`);
+        });
     }
 }
 

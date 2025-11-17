@@ -88,16 +88,18 @@ function addToCart(itemId) {
     
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     
+    const restaurantIdString = currentRestaurant._id && currentRestaurant._id.toString ? currentRestaurant._id.toString() : currentRestaurant._id;
+    
     // Check if item already exists in cart
     const existingItemIndex = cart.findIndex(cartItem => 
-        cartItem.restaurantId === currentRestaurant._id && cartItem.id === itemId
+        cartItem.restaurantId === restaurantIdString && cartItem.id === itemId
     );
     
     if (existingItemIndex !== -1) {
         cart[existingItemIndex].quantity += 1;
     } else {
         cart.push({
-            restaurantId: currentRestaurant._id,
+            restaurantId: restaurantIdString,
             restaurantName: currentRestaurant.name,
             id: item.id,
             name: item.name,

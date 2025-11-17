@@ -9,7 +9,14 @@ class Restaurant {
 
     static async getById(id) {
         const db = getDB();
-        return await db.collection('restaurants').findOne({ _id: new ObjectId(id) });
+        // For in-memory storage, we need to pass the string ID directly
+        // The database layer will handle the comparison
+        try {
+            return await db.collection('restaurants').findOne({ _id: new ObjectId(id) });
+        } catch (error) {
+            // If ObjectId fails, try with string ID
+            return await db.collection('restaurants').findOne({ _id: id });
+        }
     }
 
     static async create(restaurant) {

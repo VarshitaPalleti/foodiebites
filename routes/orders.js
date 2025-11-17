@@ -8,7 +8,7 @@ router.post('/', async (req, res) => {
         const result = await Order.create(req.body);
         res.status(201).json({ 
             message: 'Order placed successfully', 
-            orderId: result.insertedId 
+            orderId: result.insertedId && result.insertedId.toString ? result.insertedId.toString() : result.insertedId
         });
     } catch (error) {
         res.status(500).json({ error: 'Failed to create order' });
@@ -19,7 +19,12 @@ router.post('/', async (req, res) => {
 router.get('/', async (req, res) => {
     try {
         const orders = await Order.getAll();
-        res.json(orders);
+        // Ensure _id is converted to string for JSON response
+        const formattedOrders = orders.map(o => ({
+            ...o,
+            _id: o._id && o._id.toString ? o._id.toString() : o._id
+        }));
+        res.json(formattedOrders);
     } catch (error) {
         res.status(500).json({ error: 'Failed to fetch orders' });
     }
@@ -32,7 +37,12 @@ router.get('/:id', async (req, res) => {
         if (!order) {
             return res.status(404).json({ error: 'Order not found' });
         }
-        res.json(order);
+        // Ensure _id is converted to string for JSON response
+        const formattedOrder = {
+            ...order,
+            _id: order._id && order._id.toString ? order._id.toString() : order._id
+        };
+        res.json(formattedOrder);
     } catch (error) {
         res.status(500).json({ error: 'Failed to fetch order' });
     }

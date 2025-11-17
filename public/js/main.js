@@ -43,7 +43,7 @@ function displayRestaurants(restaurants) {
     
     grid.innerHTML = restaurants.map(restaurant => `
         <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition cursor-pointer transform hover:-translate-y-1"
-             onclick="window.location.href='/restaurant/${restaurant._id}'">
+             onclick="window.location.href='/restaurant/${restaurant._id && restaurant._id.toString ? restaurant._id.toString() : restaurant._id}'">
             <img src="${restaurant.image}" alt="${restaurant.name}" class="w-full h-48 object-cover">
             <div class="p-4">
                 <h4 class="text-xl font-bold text-gray-800 mb-2">${restaurant.name}</h4>
