@@ -48,7 +48,7 @@ async function startServer() {
         
         app.listen(PORT, () => {
             console.log(`Server is running on http://localhost:${PORT}`);
-            console.log('Visit http://localhost:${PORT} to view the application');
+            console.log(`Visit http://localhost:${PORT} to view the application`);
         });
     } catch (error) {
         console.error('Server startup error:', error);
