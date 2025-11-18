@@ -149,7 +149,7 @@ docker compose logs -f postgres
 docker compose logs -f pgadmin
 
 # Access PostgreSQL CLI
-docker exec -it foodiebites-postgres psql -U postgres -d foodiebites
+docker exec -it foodiebites psql -U postgres -d foodiebites
 ```
 
 ### pgAdmin Access
