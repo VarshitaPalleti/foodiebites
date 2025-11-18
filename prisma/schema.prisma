@@ -1,0 +1,44 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Restaurant {
+  id           String   @id @default(uuid())
+  name         String
+  cuisine      String
+  rating       Float
+  deliveryTime String   @map("delivery_time")
+  image        String
+  menu         Json     // Storing menu as JSON array
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  @@map("restaurants")
+}
+
+model Order {
+  id              String   @id @default(uuid())
+  restaurantId    String?  @map("restaurant_id")
+  restaurantName  String?  @map("restaurant_name")
+  items           Json     // Storing order items as JSON array
+  customerName    String   @map("customer_name")
+  customerAddress String   @map("customer_address")
+  customerPhone   String   @map("customer_phone")
+  subtotal        Float
+  tax             Float
+  deliveryFee     Float    @map("delivery_fee")
+  total           Float
+  status          String   @default("pending")
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  @@map("orders")
+}

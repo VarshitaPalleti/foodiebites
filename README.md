@@ -1,6 +1,6 @@
 # Foodie Bites - Food Delivery Application
 
-A modern, clean, and appealing food delivery web application built with HTML, JavaScript, Tailwind CSS, and MongoDB.
+A modern, clean, and appealing food delivery web application built with HTML, JavaScript, Tailwind CSS, and PostgreSQL (Prisma ORM).
 
 ## Features
 
@@ -15,13 +15,14 @@ A modern, clean, and appealing food delivery web application built with HTML, Ja
 
 - **Frontend**: HTML, JavaScript, Tailwind CSS
 - **Backend**: Node.js, Express.js
-- **Database**: MongoDB
+- **Database**: PostgreSQL with Prisma ORM
+- **Infrastructure**: Docker Compose (PostgreSQL + pgAdmin)
 - **Icons**: Font Awesome
 
 ## Prerequisites
 
 - Node.js (v14 or higher)
-- MongoDB (v4.4 or higher)
+- Docker and Docker Compose (for running PostgreSQL)
 
 ## Installation
 
@@ -38,22 +39,41 @@ cd foodiebites
 npm install
 ```
 
-3. Create a `.env` file in the root directory (optional):
-
-```
-PORT=3000
-MONGODB_URI=mongodb://localhost:27017
-DB_NAME=foodiebites
-```
-
-4. Make sure MongoDB is running on your system:
+3. Create a `.env` file in the root directory based on `.env.example`:
 
 ```bash
-# For macOS/Linux
-mongod
+cp .env.example .env
+```
 
-# For Windows
-net start MongoDB
+The default configuration is:
+```
+PORT=3000
+NODE_ENV=development
+DATABASE_URL="postgresql://postgres:postgres@localhost:5432/foodiebites?schema=public"
+```
+
+4. Start the PostgreSQL database using Docker Compose:
+
+```bash
+npm run db:docker
+```
+
+This will start:
+- PostgreSQL on port 5432
+- pgAdmin on port 8080 (access at http://localhost:8080)
+  - Email: admin@foodiebites.com
+  - Password: admin
+
+5. Run Prisma migrations to create the database schema:
+
+```bash
+npm run prisma:migrate
+```
+
+6. Generate Prisma Client:
+
+```bash
+npm run prisma:generate
 ```
 
 ## Running the Application
@@ -70,15 +90,51 @@ npm start
 http://localhost:3000
 ```
 
+## Development
+
+To run in development mode:
+
+```bash
+npm run dev
+```
+
+### Database Management
+
+- **Start database**: `npm run db:docker`
+- **Stop database**: `npm run db:down`
+- **Open Prisma Studio** (GUI for database): `npm run prisma:studio`
+- **Run migrations**: `npm run prisma:migrate`
+- **Generate Prisma Client**: `npm run prisma:generate`
+
+### Database Access
+
+**Using pgAdmin:**
+1. Open http://localhost:8080
+2. Login with email: admin@foodiebites.com, password: admin
+3. Add new server:
+   - Name: foodiebites
+   - Host: postgres (or localhost if connecting from host machine)
+   - Port: 5432
+   - Username: postgres
+   - Password: postgres
+   - Database: foodiebites
+
 ## Project Structure
 
 ```
 foodiebites/
 ├── config/
-│   └── database.js          # MongoDB connection configuration
+│   └── database.js          # Prisma database connection
 ├── models/
-│   ├── Restaurant.js        # Restaurant model and sample data
-│   └── Order.js             # Order model
+│   ├── Restaurant.js        # Restaurant model (Prisma adapter)
+│   └── Order.js             # Order model (Prisma adapter)
+├── src/
+│   ├── prismaClient.js      # Prisma client instance
+│   └── db-adapters/         # Compatibility adapters for Prisma
+│       ├── restaurantAdapter.js
+│       └── orderAdapter.js
+├── prisma/
+│   └── schema.prisma        # Prisma database schema
 ├── routes/
 │   ├── restaurants.js       # Restaurant API routes
 │   └── orders.js            # Order API routes
@@ -92,6 +148,7 @@ foodiebites/
 │       ├── restaurant.js    # Restaurant page JavaScript
 │       ├── cart.js          # Cart page JavaScript
 │       └── orders.js        # Orders page JavaScript
+├── docker-compose.yml       # Docker setup for PostgreSQL and pgAdmin
 ├── server.js                # Express server setup
 ├── package.json             # Project dependencies
 └── README.md                # Project documentation
