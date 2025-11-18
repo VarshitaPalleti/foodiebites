@@ -1,6 +1,6 @@
 # Foodie Bites - Food Delivery Application
 
-A modern, clean, and appealing food delivery web application built with HTML, JavaScript, Tailwind CSS, and MongoDB.
+A modern, clean, and appealing food delivery web application built with HTML, JavaScript, Tailwind CSS, and PostgreSQL + Prisma ORM.
 
 ## Features
 
@@ -15,13 +15,15 @@ A modern, clean, and appealing food delivery web application built with HTML, Ja
 
 - **Frontend**: HTML, JavaScript, Tailwind CSS
 - **Backend**: Node.js, Express.js
-- **Database**: MongoDB
+- **Database**: PostgreSQL (via Prisma ORM)
+- **Container**: Docker Compose (for PostgreSQL & pgAdmin)
 - **Icons**: Font Awesome
 
 ## Prerequisites
 
 - Node.js (v14 or higher)
-- MongoDB (v4.4 or higher)
+- Docker and Docker Compose (recommended for PostgreSQL)
+- OR PostgreSQL (v15 or higher) if not using Docker
 
 ## Installation
 
@@ -38,22 +40,37 @@ cd foodiebites
 npm install
 ```
 
-3. Create a `.env` file in the root directory (optional):
+3. Create a `.env` file in the root directory:
 
 ```
 PORT=3000
-MONGODB_URI=mongodb://localhost:27017
-DB_NAME=foodiebites
+DATABASE_URL="postgresql://postgres:postgres@localhost:5432/foodiebites?schema=public"
 ```
 
-4. Make sure MongoDB is running on your system:
+4. Start PostgreSQL and pgAdmin using Docker Compose:
 
 ```bash
-# For macOS/Linux
-mongod
+docker-compose up -d
+```
 
-# For Windows
-net start MongoDB
+This will start:
+- PostgreSQL on port 5432
+- pgAdmin on port 8080 (access at http://localhost:8080)
+  - Email: admin@foodiebites.com
+  - Password: admin
+
+5. Run database migrations:
+
+```bash
+npm run prisma:migrate
+```
+
+This will create the necessary database schema in PostgreSQL.
+
+6. Generate Prisma Client:
+
+```bash
+npm run prisma:generate
 ```
 
 ## Running the Application
@@ -70,15 +87,46 @@ npm start
 http://localhost:3000
 ```
 
+The application will automatically seed the database with sample restaurant data on first run.
+
+## Database Management
+
+### Prisma Scripts
+
+- `npm run prisma:generate` - Generate Prisma Client
+- `npm run prisma:migrate` - Run database migrations (development)
+- `npm run prisma:migrate:deploy` - Deploy migrations (production)
+- `npm run prisma:studio` - Open Prisma Studio to view/edit data
+
+### Access pgAdmin
+
+1. Open http://localhost:8080
+2. Login with:
+   - Email: admin@foodiebites.com
+   - Password: admin
+3. Add a new server connection:
+   - Host: postgres (or localhost if accessing from host machine)
+   - Port: 5432
+   - Username: postgres
+   - Password: postgres
+   - Database: foodiebites
+
 ## Project Structure
 
 ```
 foodiebites/
 ├── config/
-│   └── database.js          # MongoDB connection configuration
+│   └── database.js          # Legacy MongoDB config (kept for reference)
 ├── models/
-│   ├── Restaurant.js        # Restaurant model and sample data
-│   └── Order.js             # Order model
+│   ├── Restaurant.js        # Restaurant adapter (wraps Prisma)
+│   └── Order.js             # Order adapter (wraps Prisma)
+├── src/
+│   ├── prismaClient.js      # Prisma client initialization
+│   └── db-adapters/
+│       ├── RestaurantAdapter.js  # Restaurant database operations
+│       └── OrderAdapter.js       # Order database operations
+├── prisma/
+│   └── schema.prisma        # Prisma schema definition
 ├── routes/
 │   ├── restaurants.js       # Restaurant API routes
 │   └── orders.js            # Order API routes
@@ -92,6 +140,7 @@ foodiebites/
 │       ├── restaurant.js    # Restaurant page JavaScript
 │       ├── cart.js          # Cart page JavaScript
 │       └── orders.js        # Orders page JavaScript
+├── docker-compose.yml       # Docker configuration for PostgreSQL & pgAdmin
 ├── server.js                # Express server setup
 ├── package.json             # Project dependencies
 └── README.md                # Project documentation
@@ -140,6 +189,45 @@ foodiebites/
 - `GET /api/orders` - Get all orders
 - `GET /api/orders/:id` - Get order by ID
 - `PATCH /api/orders/:id/status` - Update order status
+
+## Migration from MongoDB to PostgreSQL
+
+This project has been migrated from MongoDB to PostgreSQL with Prisma ORM. The migration includes:
+
+### Key Changes
+
+1. **Database**: MongoDB → PostgreSQL
+2. **ORM**: Native MongoDB driver → Prisma ORM
+3. **Models**: Mongoose/MongoDB models → Prisma schema + adapters
+4. **IDs**: MongoDB ObjectId → UUID (String)
+5. **Deployment**: Added Docker Compose for easy PostgreSQL setup
+
+### Architecture
+
+The migration maintains backward compatibility by:
+- Keeping the same model interfaces (getAll, getById, create, etc.)
+- Using adapter pattern to wrap Prisma operations
+- Converting Prisma results to match MongoDB format (id → _id)
+
+### Prisma Schema
+
+The database schema is defined in `prisma/schema.prisma`:
+
+- **Restaurant**: Stores restaurant information and menu items (as JSON)
+- **Order**: Stores order information with a relation to Restaurant
+
+### Benefits of PostgreSQL + Prisma
+
+- **Type Safety**: Prisma provides full TypeScript/JavaScript type safety
+- **Performance**: Better query optimization and indexing
+- **Reliability**: ACID compliance and data integrity
+- **Tooling**: Prisma Studio for database visualization
+- **Migrations**: Version-controlled schema migrations
+- **Relations**: Proper foreign key constraints
+
+### Legacy MongoDB Support
+
+The old MongoDB configuration files are preserved in `config/database.js` for reference, but are no longer used by the application.
 
 ## Sample Data
 

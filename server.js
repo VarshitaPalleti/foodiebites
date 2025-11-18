@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 require('dotenv').config();
 
-const { connectDB } = require('./config/database');
+const prisma = require('./src/prismaClient');
 const Restaurant = require('./models/Restaurant');
 
 const app = express();
@@ -43,7 +43,10 @@ app.get('/orders', (req, res) => {
 // Start server
 async function startServer() {
     try {
-        await connectDB();
+        // Test Prisma connection
+        await prisma.$connect();
+        console.log('Connected to PostgreSQL');
+        
         await Restaurant.initializeSampleData();
         
         app.listen(PORT, () => {
@@ -52,11 +55,8 @@ async function startServer() {
         });
     } catch (error) {
         console.error('Server startup error:', error);
-        // Continue running even if DB connection fails - using in-memory storage
-        await Restaurant.initializeSampleData();
-        app.listen(PORT, () => {
-            console.log(`Server is running on http://localhost:${PORT} (using in-memory storage)`);
-        });
+        console.error('Make sure PostgreSQL is running and DATABASE_URL is set correctly');
+        process.exit(1);
     }
 }
 
