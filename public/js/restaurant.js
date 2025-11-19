@@ -70,7 +70,7 @@ function displayRestaurant() {
                 <h4 class="text-xl font-bold text-gray-800 mb-2">${item.name}</h4>
                 <p class="text-gray-600 text-sm mb-3">${item.description}</p>
                 <div class="flex items-center justify-between">
-                    <span class="text-2xl font-bold text-orange-500">$${item.price.toFixed(2)}</span>
+                    <span class="text-2xl font-bold text-orange-500">₹${item.price.toFixed(2)}</span>
                     <button onclick="addToCart(${item.id})" 
                             class="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition">
                         <i class="fas fa-plus mr-2"></i>Add

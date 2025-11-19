@@ -76,7 +76,7 @@ function displayOrders(orders) {
                         ${order.items.map(item => `
                             <li class="flex justify-between text-gray-600">
                                 <span>${item.quantity}x ${item.name}</span>
-                                <span>$${(item.price * item.quantity).toFixed(2)}</span>
+                                <span>₹${(item.price * item.quantity).toFixed(2)}</span>
                             </li>
                         `).join('')}
                     </ul>
@@ -86,13 +86,13 @@ function displayOrders(orders) {
                     <h4 class="font-semibold text-gray-800 mb-2">Delivery Details:</h4>
                     <p class="text-gray-600"><i class="fas fa-user mr-2"></i>${order.customerName}</p>
                     <p class="text-gray-600"><i class="fas fa-phone mr-2"></i>${order.customerPhone}</p>
-                    <p class="text-gray-600"><i class="fas fa-map-marker-alt mr-2"></i>${order.deliveryAddress}</p>
+                    <p class="text-gray-600"><i class="fas fa-map-marker-alt mr-2"></i>${order.customerAddress}</p>
                 </div>
                 
                 <div class="border-t border-gray-200 pt-4">
                     <div class="flex justify-between items-center">
                         <span class="text-lg font-semibold text-gray-800">Total:</span>
-                        <span class="text-2xl font-bold text-orange-500">$${order.total.toFixed(2)}</span>
+                        <span class="text-2xl font-bold text-orange-500">₹${order.totalAmount.toFixed(2)}</span>
                     </div>
                 </div>
                 

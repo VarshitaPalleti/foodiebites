@@ -3,11 +3,28 @@ const prisma = require('../prismaClient');
 class OrderAdapter {
     static async create(orderData) {
         try {
+            // Extract the first restaurant ID from the cart items
+            const restaurantId = orderData.items && orderData.items.length > 0 
+                ? orderData.items[0].restaurantId 
+                : null;
+            
+            if (!restaurantId) {
+                throw new Error('Restaurant ID is required');
+            }
+
+            // Map the order data to match Prisma schema
+            const mappedData = {
+                restaurantId: restaurantId,
+                customerName: orderData.customerName,
+                customerAddress: orderData.deliveryAddress, // Map deliveryAddress to customerAddress
+                customerPhone: orderData.customerPhone,
+                totalAmount: orderData.total, // Map total to totalAmount
+                items: orderData.items,
+                status: 'pending'
+            };
+
             const order = await prisma.order.create({
-                data: {
-                    ...orderData,
-                    status: 'pending'
-                }
+                data: mappedData
             });
             return { insertedId: order.id };
         } catch (error) {
